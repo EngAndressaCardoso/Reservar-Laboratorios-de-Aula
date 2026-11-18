@@ -18,7 +18,7 @@ Criação de um protótipo web funcional para consulta e reserva de laboratório
 ## Integrantes
 | Nome                                    | Matrícula |
 | --------------------------------------- | --------- |
-| Andressa Valéria Cardoso dos Santos     | 01245991  | 
+| Andressa Valéria Cardoso dos Santos     | 01249591  | 
 | Bruna Freitas da Silva                  | 01332048  |
 | Sellena de Assis Ribeiro Lima           | 01862534  |
 
