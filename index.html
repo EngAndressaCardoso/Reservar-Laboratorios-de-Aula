@@ -1,1 +1,251 @@
-<!-- Base HTML -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReservaLab | Sistema de Reserva de Laboratórios - UNINASSAU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/css/style.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Barra Lateral (Sidebar) -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🧪</div>
+        <span class="brand-name">ReservaLab</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-target="view-inicio">
+          <span class="nav-icon">🏢</span>
+          <span>Início</span>
+        </button>
+        <button class="nav-item" data-target="view-laboratorios">
+          <span class="nav-icon">🔬</span>
+          <span>Laboratórios</span>
+        </button>
+        <button class="nav-item" data-target="view-nova-reserva">
+          <span class="nav-icon">📅</span>
+          <span>Nova Reserva</span>
+        </button>
+        <button class="nav-item" data-target="view-agenda">
+          <span class="nav-icon">📋</span>
+          <span>Agenda de Reservas</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="avatar">PR</div>
+        <div class="user-info">
+          <strong id="sidebar-prof-name">Portal Docente</strong>
+          <span>UNINASSAU</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Área Principal -->
+    <main class="main-content">
+      <!-- TELA 01: INÍCIO / VISÃO GERAL -->
+      <section id="view-inicio" class="view active">
+        <header class="page-header">
+          <div>
+            <h1>Olá, Professor(a)!</h1>
+            <p class="subtitle">Consulte a disponibilidade e agende espaços acadêmicos.</p>
+          </div>
+          <div class="header-badge">Semestre 2026.2</div>
+        </header>
+
+        <div class="hero-banner">
+          <div class="hero-text">
+            <span class="hero-tag">PORTAL ACADÊMICO</span>
+            <h2>Reserve o espaço ideal para sua próxima aula.</h2>
+            <p>Gerencie horários de laboratórios de informática e práticas de engenharia.</p>
+            <button class="btn-white" onclick="navigateTo('view-nova-reserva')">
+              Nova reserva <span>→</span>
+            </button>
+          </div>
+          <div class="hero-graphic">⚗️</div>
+        </div>
+
+        <div class="section-header">
+          <h3>Laboratórios (Visão Rápida)</h3>
+          <button class="btn-link" onclick="navigateTo('view-laboratorios')">Ver todos</button>
+        </div>
+
+        <div id="inicio-labs-grid" class="cards-grid-3">
+          <!-- Preenchido via JS -->
+        </div>
+
+        <div class="section-header" style="margin-top: 28px;">
+          <h3>Últimas Reservas da Sessão</h3>
+          <button class="btn-link" onclick="navigateTo('view-agenda')">Ver agenda completa</button>
+        </div>
+
+        <div id="inicio-recent-list" class="recent-list">
+          <!-- Preenchido via JS -->
+        </div>
+      </section>
+
+      <!-- TELA 02: SELEÇÃO DE LABORATÓRIOS (RF01) -->
+      <section id="view-laboratorios" class="view">
+        <header class="page-header">
+          <div>
+            <h1>Laboratórios</h1>
+            <p class="subtitle">3 espaços cadastrados na unidade</p>
+          </div>
+          <button class="btn-primary" onclick="navigateTo('view-nova-reserva')">+ Nova reserva</button>
+        </header>
+
+        <div class="filter-bar">
+          <input
+            type="text"
+            id="search-lab"
+            class="input-search"
+            placeholder="Buscar laboratório por nome ou bloco..."
+            oninput="renderLabs()"
+          />
+        </div>
+
+        <div id="labs-full-grid" class="cards-grid-2">
+          <!-- Preenchido via JS -->
+        </div>
+      </section>
+
+      <!-- TELA 03: NOVA RESERVA (RF02 / RF03) -->
+      <section id="view-nova-reserva" class="view">
+        <header class="page-header">
+          <div>
+            <h1>Nova reserva</h1>
+            <p class="subtitle">Preencha os dados do docente e da aula para solicitar o laboratório</p>
+          </div>
+        </header>
+
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-icon">📅</div>
+            <div>
+              <h3>Dados da reserva</h3>
+              <p>Todos os campos são obrigatórios</p>
+            </div>
+          </div>
+
+          <div id="form-alert" class="alert-box hidden"></div>
+
+          <form id="reservation-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prof-nome">Professor</label>
+                <input type="text" id="prof-nome" placeholder="Ex: Ana Beatriz Silva" required />
+              </div>
+              <div class="form-group">
+                <label for="prof-matricula">Matrícula</label>
+                <input type="text" id="prof-matricula" placeholder="Ex: PROF-1842" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="lab-select">Laboratório</label>
+              <select id="lab-select" required>
+                <!-- Preenchido via JS -->
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reserva-data">Data</label>
+                <input type="date" id="reserva-data" required />
+              </div>
+              <div class="form-group">
+                <label for="reserva-horario">Horário</label>
+                <select id="reserva-horario" required>
+                  <option value="">Selecione o horário...</option>
+                  <option value="08:00 - 10:00">08:00 - 10:00 (Manhã I)</option>
+                  <option value="10:15 - 12:00">10:15 - 12:00 (Manhã II)</option>
+                  <option value="14:00 - 16:00">14:00 - 16:00 (Tarde I)</option>
+                  <option value="19:00 - 20:40">19:00 - 20:40 (Noite I)</option>
+                  <option value="20:50 - 22:30">20:50 - 22:30 (Noite II)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="reserva-tipo">Tipo de Atividade</label>
+                <select id="reserva-tipo" required>
+                  <option value="Aula Regular">Aula Regular (Turma ≥ 30 alunos)</option>
+                  <option value="Monitoria / Pesquisa">Monitoria / Grupo de Pesquisa</option>
+                  <option value="Aula Prática Específica">Aula Prática Específica (< 30 alunos)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="reserva-finalidade">Descrição / Disciplina</label>
+                <input type="text" id="reserva-finalidade" placeholder="Ex: Aula prática de Programação Web" required />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" onclick="navigateTo('view-inicio')">Cancelar</button>
+              <button type="submit" class="btn-primary">Confirmar reserva</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- TELA 04: RESERVA CONFIRMADA -->
+      <section id="view-confirmada" class="view">
+        <div class="confirmation-wrapper">
+          <div class="confirmation-brand">
+            <div class="brand-icon-sm">🧪</div>
+            <span>ReservaLab</span>
+          </div>
+
+          <div class="confirmation-card">
+            <div class="check-circle">✓</div>
+            <span class="conf-tag">SOLICITAÇÃO CONCLUÍDA</span>
+            <h2>Reserva confirmada!</h2>
+            <p class="conf-desc">Seu laboratório está reservado e pronto para receber a turma.</p>
+
+            <div id="confirmation-summary" class="summary-box">
+              <!-- Preenchido via JS -->
+            </div>
+
+            <button class="btn-primary btn-full" onclick="navigateTo('view-agenda')">
+              Ver minhas reservas
+            </button>
+            <button class="btn-text-only" onclick="navigateTo('view-inicio')">
+              Voltar ao início
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELA 05: AGENDA DE RESERVAS (RF05) -->
+      <section id="view-agenda" class="view">
+        <header class="page-header">
+          <div>
+            <h1>Agenda de reservas</h1>
+            <p class="subtitle">Acompanhe as reservas registradas nesta sessão</p>
+          </div>
+          <button class="btn-primary" onclick="navigateTo('view-nova-reserva')">+ Nova reserva</button>
+        </header>
+
+        <div class="agenda-container">
+          <div class="agenda-topbar">
+            <strong id="agenda-count-label">0 reservas registradas</strong>
+            <span class="status-pill confirmed">● Sistema Ativo</span>
+          </div>
+
+          <div id="agenda-list" class="agenda-list">
+            <!-- Preenchido via JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="src/js/app.js"></script>
+</body>
+</html>
