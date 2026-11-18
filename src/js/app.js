@@ -216,7 +216,6 @@ function handleReservationSubmit(event) {
   reservas.unshift(novaReserva);
 
   // Atualiza nome na sidebar e listas
-  document.getElementById("sidebar-prof-name").textContent = professor;
   renderAgenda();
   showConfirmationScreen(novaReserva);
   event.target.reset();

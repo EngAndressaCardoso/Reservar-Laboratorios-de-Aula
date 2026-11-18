@@ -137,17 +137,17 @@
           <form id="reservation-form" novalidate>
             <div class="form-row">
               <div class="form-group">
-                <label for="prof-nome">Professor</label>
+                <label for="prof-nome">Professor*</label>
                 <input type="text" id="prof-nome" placeholder="Ex: Ana Beatriz Silva" required />
               </div>
               <div class="form-group">
-                <label for="prof-matricula">Matrícula</label>
+                <label for="prof-matricula">Matrícula*</label>
                 <input type="text" id="prof-matricula" placeholder="Ex: PROF-1842" required />
               </div>
             </div>
 
             <div class="form-group">
-              <label for="lab-select">Laboratório</label>
+              <label for="lab-select">Laboratório*</label>
               <select id="lab-select" required>
                 <!-- Preenchido via JS -->
               </select>
@@ -155,11 +155,11 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label for="reserva-data">Data</label>
+                <label for="reserva-data">Data*</label>
                 <input type="date" id="reserva-data" required />
               </div>
               <div class="form-group">
-                <label for="reserva-horario">Horário</label>
+                <label for="reserva-horario">Horário*</label>
                 <select id="reserva-horario" required>
                   <option value="">Selecione o horário...</option>
                   <option value="08:00 - 10:00">08:00 - 10:00 (Manhã I)</option>
@@ -173,7 +173,7 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label for="reserva-tipo">Tipo de Atividade</label>
+                <label for="reserva-tipo">Tipo de Atividade*</label>
                 <select id="reserva-tipo" required>
                   <option value="Aula Regular">Aula Regular (Turma ≥ 30 alunos)</option>
                   <option value="Monitoria / Pesquisa">Monitoria / Grupo de Pesquisa</option>
@@ -181,7 +181,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="reserva-finalidade">Descrição / Disciplina</label>
+                <label for="reserva-finalidade">Descrição / Disciplina*</label>
                 <input type="text" id="reserva-finalidade" placeholder="Ex: Aula prática de Programação Web" required />
               </div>
             </div>
